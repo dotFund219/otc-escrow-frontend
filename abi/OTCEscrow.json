@@ -1,0 +1,384 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_ordersContract",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_admin",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_config",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidAmount",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidState",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidToken",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotBuyer",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotSeller",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TransferFailed",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum OTCEnums.TradeStatus",
+        "name": "newStatus",
+        "type": "uint8"
+      }
+    ],
+    "name": "AdminResolved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "txid",
+        "type": "string"
+      }
+    ],
+    "name": "DeliverySubmitted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "ReceiptConfirmed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "ReceiptRejected",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "orderId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      }
+    ],
+    "name": "TradeOpened",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "adminContract",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "adminForceRefund",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "adminForceRelease",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "configContract",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "confirmReceipt",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTrade",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "orderId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "buyer",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "quoteToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "quoteAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "feeAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "deliveryTxId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "createdAt",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deliveredAt",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum OTCEnums.TradeStatus",
+            "name": "status",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct OTCStructs.Trade",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nextTradeId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "orderId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "quoteToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "quoteAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "feeAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "openTradeFromOrder",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ordersContract",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "rejectReceipt",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tradeId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "txid",
+        "type": "string"
+      }
+    ],
+    "name": "submitDeliveryTx",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

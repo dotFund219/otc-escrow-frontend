@@ -1,0 +1,315 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_owner",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_treasury",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [],
+        "name": "NotOwner",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "UnsupportedAsset",
+        "type": "error"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "symbol",
+                "type": "bytes32"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "feed",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "enabled",
+                "type": "bool"
+            }
+        ],
+        "name": "AssetSet",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "feeBps",
+                "type": "uint256"
+            }
+        ],
+        "name": "FeeSet",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "allowed",
+                "type": "bool"
+            }
+        ],
+        "name": "QuoteTokenSet",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "spreadBps",
+                "type": "uint256"
+            }
+        ],
+        "name": "SpreadSet",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "treasury",
+                "type": "address"
+            }
+        ],
+        "name": "TreasurySet",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "allowedQuoteTokens",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "name": "assets",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "enabled",
+                "type": "bool"
+            },
+            {
+                "internalType": "address",
+                "name": "chainlinkFeed",
+                "type": "address"
+            },
+            {
+                "internalType": "uint8",
+                "name": "feedDecimals",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "feeBps",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "symbol",
+                "type": "bytes32"
+            }
+        ],
+        "name": "getOraclePrice",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "price",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint8",
+                "name": "decimals_",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "symbol",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "feed",
+                "type": "address"
+            },
+            {
+                "internalType": "bool",
+                "name": "enabled",
+                "type": "bool"
+            }
+        ],
+        "name": "setAsset",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_feeBps",
+                "type": "uint256"
+            }
+        ],
+        "name": "setFeeBps",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "bool",
+                "name": "allowed",
+                "type": "bool"
+            }
+        ],
+        "name": "setQuoteToken",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_spreadBps",
+                "type": "uint256"
+            }
+        ],
+        "name": "setSpreadBps",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_treasury",
+                "type": "address"
+            }
+        ],
+        "name": "setTreasury",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "spreadBps",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "treasury",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
