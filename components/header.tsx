@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import {
@@ -14,6 +15,16 @@ import { Button } from "@/components/ui/button";
 
 export function Header() {
   const { user, logout } = useAuth();
+  const pathname = usePathname();
+
+  // Check if the current route matches the given path
+  const isActive = (path: string) => pathname.startsWith(path);
+
+  // Shared nav button style with active state support
+  const navButtonClass = (active: boolean) =>
+    active
+      ? "gap-2 bg-secondary text-foreground"
+      : "gap-2 text-muted-foreground hover:text-foreground";
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-md">
@@ -34,28 +45,30 @@ export function Header() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="gap-2 text-muted-foreground hover:text-foreground"
+                  className={navButtonClass(isActive("/trade"))}
                 >
                   <BarChart3 className="h-4 w-4" />
                   Trade
                 </Button>
               </Link>
+
               <Link href="/dashboard">
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="gap-2 text-muted-foreground hover:text-foreground"
+                  className={navButtonClass(isActive("/dashboard"))}
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   Dashboard
                 </Button>
               </Link>
+
               {user.role === "ADMIN" && (
                 <Link href="/admin">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="gap-2 text-muted-foreground hover:text-foreground"
+                    className={navButtonClass(isActive("/admin"))}
                   >
                     <Shield className="h-4 w-4" />
                     Admin
@@ -78,11 +91,13 @@ export function Header() {
               </span>
             </div>
           )}
+
           <ConnectButton
             showBalance={false}
             chainStatus="icon"
             accountStatus="avatar"
           />
+
           {user && (
             <Button
               variant="ghost"
