@@ -7,5 +7,5 @@ export const config = getDefaultConfig({
     process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "demo-project-id",
   // Phase 1: BNB Smart Chain Testnet
   chains: [bscTestnet],
-  ssr: true,
+  ssr: false,
 });
