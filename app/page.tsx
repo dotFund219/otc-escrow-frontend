@@ -12,8 +12,10 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
+import { redirect } from 'next/navigation'
 
 export default function HomePage() {
+  redirect('/trade')
   const { user } = useAuth();
 
   return (
