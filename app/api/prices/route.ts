@@ -51,14 +51,16 @@ export async function GET() {
       };
     }
 
-    const [btc, eth] = await Promise.all([
-      readFeed(ADDRESSES.BTCFeed),
-      readFeed(ADDRESSES.ETHFeed),
+    const [btc, eth, usdt, usdc] = await Promise.all([
+      readFeed(ADDRESSES.WBTCFeed),
+      readFeed(ADDRESSES.WETHFeed),
+      readFeed(ADDRESSES.USDTFeed),
+      readFeed(ADDRESSES.USDCFeed),
     ]);
 
     const prices: PriceData[] = [
       {
-        symbol: "BTC",
+        symbol: "WBTC",
         price: btc.price,
         change_24h: 0,
         volume_24h: 0,
@@ -66,7 +68,7 @@ export async function GET() {
         last_updated: btc.updatedAt,
       },
       {
-        symbol: "ETH",
+        symbol: "WETH",
         price: eth.price,
         change_24h: 0,
         volume_24h: 0,
@@ -75,7 +77,7 @@ export async function GET() {
       },
       {
         symbol: "USDT",
-        price: 1.0,
+        price: usdt.price,
         change_24h: 0,
         volume_24h: 0,
         market_cap: 0,
@@ -83,7 +85,7 @@ export async function GET() {
       },
       {
         symbol: "USDC",
-        price: 1.0,
+        price: usdc.price,
         change_24h: 0,
         volume_24h: 0,
         market_cap: 0,
@@ -105,7 +107,7 @@ export async function GET() {
 function getFallbackPrices(): PriceData[] {
   return [
     {
-      symbol: "BTC",
+      symbol: "WBTC",
       price: 97500,
       change_24h: 2.1,
       volume_24h: 28000000000,
@@ -113,7 +115,7 @@ function getFallbackPrices(): PriceData[] {
       last_updated: new Date().toISOString(),
     },
     {
-      symbol: "ETH",
+      symbol: "WETH",
       price: 3450,
       change_24h: 1.5,
       volume_24h: 15000000000,

@@ -24,7 +24,7 @@ export async function PATCH(req: NextRequest) {
 
     const { asset, fee_bps, spread_bps } = await req.json();
 
-    if (!["BTC", "ETH"].includes(asset)) {
+    if (!["WBTC", "WETH", "USDT", "USDC"].includes(asset)) {
       return NextResponse.json(
         { success: false, error: "Invalid asset" },
         { status: 400 }

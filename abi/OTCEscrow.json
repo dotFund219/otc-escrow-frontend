@@ -238,6 +238,16 @@
           },
           {
             "internalType": "address",
+            "name": "sellToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sellAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
             "name": "quoteToken",
             "type": "address"
           },
@@ -309,6 +319,16 @@
         "internalType": "address",
         "name": "seller",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "sellToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "sellAmount",
+        "type": "uint256"
       },
       {
         "internalType": "address",

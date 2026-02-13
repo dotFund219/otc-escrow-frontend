@@ -98,11 +98,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 });
     }
 
-    if (!["BTC", "ETH"].includes(asset)) {
+    if (!["WBTC", "WETH", "USDT", "USDC"].includes(asset)) {
       return NextResponse.json({ success: false, error: "Invalid asset" }, { status: 400 });
     }
 
-    if (!["USDT", "USDC"].includes(quote_token)) {
+    if (!["WBTC", "WETH", "USDT", "USDC"].includes(quote_token)) {
       return NextResponse.json({ success: false, error: "Invalid quote_token" }, { status: 400 });
     }
 

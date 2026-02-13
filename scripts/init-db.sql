@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS orders (
   id BIGINT PRIMARY KEY,                      -- on-chain orderId
   user_id INT NOT NULL,                       -- seller (creator)
-  asset ENUM('BTC','ETH') NOT NULL,           -- off-chain delivered asset
-  quote_token ENUM('USDT','USDC') NOT NULL,   -- on-chain escrow token
+  asset ENUM('WBTC','WETH', 'USDT', 'USDC') NOT NULL,           -- off-chain delivered asset
+  quote_token ENUM('WBTC','WETH', 'USDT', 'USDC') NOT NULL,   -- on-chain escrow token
 
   quantity DECIMAL(28,18) NOT NULL,           -- sellAmount / 1e18 (UI value)
 
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS escrow_events (
 -- -------------------------
 CREATE TABLE IF NOT EXISTS fee_config (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  asset ENUM('BTC','ETH') NOT NULL UNIQUE,
+  asset ENUM('WBTC','WETH', 'USDT', 'USDC') NOT NULL UNIQUE,
   fee_bps INT NOT NULL,
   spread_bps INT NOT NULL,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

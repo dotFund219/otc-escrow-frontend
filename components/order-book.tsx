@@ -717,7 +717,7 @@ export function OrderBook() {
             <div>
               <span className="text-sm text-foreground">
                 {Number((order as any).price_per_unit || 0).toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
+                  minimumFractionDigits: 6,
                 })}{" "}
                 {quoteSymbol}
               </span>
@@ -728,7 +728,7 @@ export function OrderBook() {
                 </span>
               )}
 
-              {spotPrice > 0 && orderPrice > 0 && (
+              {/* {spotPrice > 0 && orderPrice > 0 && (
                 <span
                   className={`ml-1 text-xs ${
                     priceDiff >= 0 ? "text-success" : "text-destructive"
@@ -737,12 +737,12 @@ export function OrderBook() {
                   ({priceDiff >= 0 ? "+" : ""}
                   {priceDiff.toFixed(1)}%)
                 </span>
-              )}
+              )} */}
             </div>
 
             <span className="text-sm font-medium text-foreground">
               {Number((order as any).total_amount || 0).toLocaleString(undefined, {
-                minimumFractionDigits: 2,
+                minimumFractionDigits: 6,
               })}{" "}
               {quoteSymbol}
             </span>

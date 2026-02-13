@@ -27,11 +27,19 @@ export const ADDRESSES = {
     ("0x1C06e9eb8753E2FE812e1746b020c22BeC22643D" as const),
   USDC: (process.env.NEXT_PUBLIC_USDC_ADDRESS as `0x${string}`) ||
     ("0xd2898DA0Dd8b6Df0D88e9FFC5Cd37fD12D44d2dE" as const),
+  WBTC: (process.env.NEXT_PUBLIC_WBTC_ADDRESS as `0x${string}`) ||
+    ("0x1C06e9eb8753E2FE812e1746b020c22BeC22643D" as const),
+  WETH: (process.env.NEXT_PUBLIC_WETH_ADDRESS as `0x${string}`) ||
+    ("0xd2898DA0Dd8b6Df0D88e9FFC5Cd37fD12D44d2dE" as const),
 
   // Chainlink feeds
-  BTCFeed: (process.env.NEXT_PUBLIC_BTC_USD_FEED as `0x${string}`) ||
+  WBTCFeed: (process.env.NEXT_PUBLIC_WBTC_USD_FEED as `0x${string}`) ||
     ("0xf6B23a90BEc2D96acBB0B77e86488b112ba4eC2b" as const),
-  ETHFeed: (process.env.NEXT_PUBLIC_ETH_USD_FEED as `0x${string}`) ||
+  WETHFeed: (process.env.NEXT_PUBLIC_WETH_USD_FEED as `0x${string}`) ||
+    ("0x601BA06056D15f85D15715955B9EB1c3E9320CaD" as const),
+  USDTFeed: (process.env.NEXT_PUBLIC_USDT_USD_FEED as `0x${string}`) ||
+    ("0xf6B23a90BEc2D96acBB0B77e86488b112ba4eC2b" as const),
+  USDCFeed: (process.env.NEXT_PUBLIC_USDC_USD_FEED as `0x${string}`) ||
     ("0x601BA06056D15f85D15715955B9EB1c3E9320CaD" as const),
 
   // Core modules
@@ -46,11 +54,7 @@ export const ADDRESSES = {
 } as const;
 
 // ---- Convenience helpers ----
-export type SupportedAsset = "BTC" | "ETH" | "USDT" | "USDC";
-
-export function getQuoteTokenAddress(symbol: "USDT" | "USDC"): `0x${string}` {
-  return (symbol === "USDT" ? ADDRESSES.USDT : ADDRESSES.USDC) as `0x${string}`;
-}
+export type SupportedAsset = "WBTC" | "WETH" | "USDT" | "USDC";
 
 // Minimal ERC-20 ABI (approve + allowance + balanceOf + decimals)
 export const ERC20_ABI = [
@@ -134,6 +138,8 @@ export const CONFIG_CONTRACT_ADDRESS = ADDRESSES.Config;
 
 export const USDT_ADDRESS = ADDRESSES.USDT;
 export const USDC_ADDRESS = ADDRESSES.USDC;
+export const WBTC_ADDRESS = ADDRESSES.WBTC;
+export const WETH_ADDRESS = ADDRESSES.WETH;
 
 // -----------------------------------------------------------------------------
 // Helpers
@@ -141,5 +147,7 @@ export const USDC_ADDRESS = ADDRESSES.USDC;
 export function getTokenAddress(asset: Asset): `0x${string}` | null {
   if (asset === "USDT") return ADDRESSES.USDT as `0x${string}`;
   if (asset === "USDC") return ADDRESSES.USDC as `0x${string}`;
+  if (asset === "WBTC") return ADDRESSES.WBTC as `0x${string}`;
+  if (asset === "WETH") return ADDRESSES.WETH as `0x${string}`;
   return null;
 }

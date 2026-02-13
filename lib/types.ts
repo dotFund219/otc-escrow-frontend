@@ -1,4 +1,4 @@
-export type Asset = "BTC" | "ETH" | "USDT" | "USDC";
+export type Asset = "WBTC" | "WETH" | "USDT" | "USDC";
 export type OrderSide = "BUY" | "SELL";
 export type OrderStatus =
   | "PENDING"
@@ -28,7 +28,7 @@ export interface Order {
   user_id: number;
   side: OrderSide;
   asset: Asset;
-  quote_token: "USDT" | "USDC";
+  quote_token: "USDT" | "USDC" | "WBTC" | "WETH";
   quantity: string;
   price_per_unit: string;
   total_amount: string;
@@ -55,7 +55,7 @@ export interface PriceData {
 export interface FeeConfig {
   id: number;
   asset: Asset;
-  quote_token: "USDT" | "USDC";
+  quote_token: "USDT" | "USDC" | "WBTC" | "WETH";
   maker_fee_bps: number;
   taker_fee_bps: number;
   min_order_size: string;

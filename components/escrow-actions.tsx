@@ -22,7 +22,7 @@ interface EscrowActionsProps {
   onUpdate: () => void;
 }
 
-async function patchOrderById(orderId: number, update: Partial<Order>) {
+async function patchOrder(orderId: number, update: Record<string, any>): Promise<void> {
   const res = await fetch(`/api/orders/${orderId}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
@@ -130,7 +130,7 @@ export function EscrowActions({ order, isOwner, isCounterparty, onUpdate }: Escr
 
       // Step 4: Patch DB only after chain success and verification
       toast.info("Step 4/4: Syncing DB...");
-      await patchOrderById(order.id, {
+      await patchOrder(order.id, {
         status: "ESCROWED" as any,
         escrow_tx_hash: takeHash as any,
         trade_id: Number(takenTradeId),
@@ -181,7 +181,7 @@ export function EscrowActions({ order, isOwner, isCounterparty, onUpdate }: Escr
       toast.info("Waiting submitDeliveryTx confirmation...");
       await waitForSuccessOrThrow(publicClient, txHash, "submitDeliveryTx");
 
-      await patchOrderById(order.id, { status: "DELIVERED" as any, delivery_tx_hash: txHash as any });
+      await patchOrder(order.id, { status: "DELIVERED" as any, delivery_tx_hash: txHash as any });
       toast.success("Delivery TX submitted.");
       onUpdate();
     } catch (err: any) {
@@ -220,7 +220,7 @@ export function EscrowActions({ order, isOwner, isCounterparty, onUpdate }: Escr
       toast.info("Waiting confirmReceipt confirmation...");
       await waitForSuccessOrThrow(publicClient, txHash, "confirmReceipt");
 
-      await patchOrderById(order.id, { status: "COMPLETED" as any, confirm_tx_hash: txHash as any });
+      await patchOrder(order.id, { status: "COMPLETED" as any, confirm_tx_hash: txHash as any });
       toast.success("Receipt confirmed.");
       onUpdate();
     } catch (err: any) {
@@ -258,7 +258,7 @@ export function EscrowActions({ order, isOwner, isCounterparty, onUpdate }: Escr
       toast.info("Waiting rejectReceipt confirmation...");
       await waitForSuccessOrThrow(publicClient, txHash, "rejectReceipt");
 
-      await patchOrderById(order.id, { status: "DISPUTED" as any, reject_tx_hash: txHash as any });
+      await patchOrder(order.id, { status: "DISPUTED" as any, reject_tx_hash: txHash as any });
       toast.success("Trade disputed.");
       onUpdate();
     } catch (err: any) {
@@ -296,7 +296,7 @@ export function EscrowActions({ order, isOwner, isCounterparty, onUpdate }: Escr
       toast.info("Waiting cancelOrder confirmation...");
       await waitForSuccessOrThrow(publicClient, txHash, "cancelOrder");
 
-      await patchOrderById(order.id, { status: "CANCELLED" as any, cancel_tx_hash: txHash as any });
+      await patchOrder(order.id, { status: "CANCELLED" as any, cancel_tx_hash: txHash as any });
       toast.success("Order cancelled.");
       onUpdate();
     } catch (err: any) {

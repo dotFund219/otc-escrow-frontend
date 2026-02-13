@@ -4,15 +4,15 @@ import { usePrices } from "@/hooks/use-prices";
 import { ArrowUp, ArrowDown, RefreshCw } from "lucide-react";
 
 const ASSET_ICONS: Record<string, string> = {
-  BTC: "B",
-  ETH: "E",
+  WBTC: "B",
+  WETH: "E",
   USDT: "T",
   USDC: "C",
 };
 
 const ASSET_COLORS: Record<string, string> = {
-  BTC: "bg-amber-500/10 text-amber-400",
-  ETH: "bg-blue-500/10 text-blue-400",
+  WBTC: "bg-amber-500/10 text-amber-400",
+  WETH: "bg-blue-500/10 text-blue-400",
   USDT: "bg-emerald-500/10 text-emerald-400",
   USDC: "bg-sky-500/10 text-sky-400",
 };
@@ -64,10 +64,10 @@ export function PriceTicker() {
                 {price.symbol}
               </p>
               <p className="text-xs text-muted-foreground">
-                {price.symbol === "BTC"
-                  ? "Bitcoin"
-                  : price.symbol === "ETH"
-                    ? "Ethereum"
+                {price.symbol === "WBTC"
+                  ? "Wrapped Bitcoin"
+                  : price.symbol === "WETH"
+                    ? "Wrapped Ethereum"
                     : price.symbol === "USDT"
                       ? "Tether"
                       : "USD Coin"}

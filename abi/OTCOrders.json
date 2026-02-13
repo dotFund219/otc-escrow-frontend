@@ -85,9 +85,9 @@
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
-        "name": "sellAsset",
-        "type": "bytes32"
+        "internalType": "address",
+        "name": "sellToken",
+        "type": "address"
       },
       {
         "indexed": false,
@@ -178,9 +178,9 @@
   {
     "inputs": [
       {
-        "internalType": "bytes32",
-        "name": "sellAsset",
-        "type": "bytes32"
+        "internalType": "address",
+        "name": "sellToken",
+        "type": "address"
       },
       {
         "internalType": "uint256",
@@ -251,9 +251,9 @@
         "type": "address"
       },
       {
-        "internalType": "bytes32",
+        "internalType": "address",
         "name": "sellAsset",
-        "type": "bytes32"
+        "type": "address"
       },
       {
         "internalType": "uint256",

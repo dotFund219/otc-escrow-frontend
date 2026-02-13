@@ -30,9 +30,9 @@
         "inputs": [
             {
                 "indexed": true,
-                "internalType": "bytes32",
-                "name": "symbol",
-                "type": "bytes32"
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
             },
             {
                 "indexed": false,
@@ -130,9 +130,9 @@
     {
         "inputs": [
             {
-                "internalType": "bytes32",
+                "internalType": "address",
                 "name": "",
-                "type": "bytes32"
+                "type": "address"
             }
         ],
         "name": "assets",
@@ -172,9 +172,9 @@
     {
         "inputs": [
             {
-                "internalType": "bytes32",
-                "name": "symbol",
-                "type": "bytes32"
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
             }
         ],
         "name": "getOraclePrice",
@@ -209,9 +209,9 @@
     {
         "inputs": [
             {
-                "internalType": "bytes32",
-                "name": "symbol",
-                "type": "bytes32"
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
             },
             {
                 "internalType": "address",
